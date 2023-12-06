@@ -21,8 +21,8 @@ Motor motorY = Motor(stepPinY, dirPinY, delayY);
 
 // Initialize the servo
 Servo servo1;
-const int servo1_pos = 0;
 const int servo1_pin = 12;
+int servo1_pos = 0;
 
 void setup() {
     // --STEP MOTOR SETUP--
@@ -31,7 +31,7 @@ void setup() {
     // --SERVO SETUP--
     servo1.attach(servo1_pin);
     servo1.write(90); // Set the servo to a neutral position
-
+    servo1_pos = 90;
 
     // -- DEBUG --
     Serial.begin(9600);
