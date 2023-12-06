@@ -13,8 +13,8 @@ private:
 
 public:
   Motor(int stepPin, int dirPin, int delayTime);
-  void moveClockwiseTo(int targetPosition);
-  void moveCounterClockwiseTo(int targetPosition);
+  void moveTo(int targetPosition);
+  void setDirection(int direction);
   int getPosition();
 };
 
