@@ -6,12 +6,10 @@ Motor::Motor(int stepPin, int dirPin, int delayTime) {
   this->delayTime = delayTime;
 
   this->currentPosition = 0;
-  this->currentDirection = HIGH; // set direction, HIGH for clockwise, LOW for anticlockwise
+  this->currentDirection; // set direction, HIGH for clockwise, LOW for anticlockwise
 
   pinMode(stepPin, OUTPUT);
   pinMode(dirPin, OUTPUT);
-
-  digitalWrite(dirPin, currentDirection);
 }
 
 void Motor::setDirection(int direction) {
