@@ -13,7 +13,7 @@ const int delayX = 2;
 
 const int stepPinY = 3;
 const int dirPinY = 6;
-const int delayY = 5;
+const int delayY = 2;
 
 const int stepPinZ = 4;
 const int dirPinZ = 7;
@@ -32,17 +32,16 @@ Servo servo;
 
 
 void setup() {
-    // --SERVO SETUP--
-    servo.attach(servo_pin);
-    servo.write(180);              // tell servo to go to position in variable 'pos'
+
+  // Move up the top plate
+   motorY.setDirection(HIGH);
+  motorY.moveTo(500);
 
     // -- DEBUG --
     Serial.begin(9600);
     Serial.println("initialized");
-
-    // Move up the top plate
-    motorY.setDirection(HIGH);
-    motorY.moveTo(2000);
+    
+   cookPancake();
   
 
  //
@@ -69,28 +68,41 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   // Open the valve 
-  cookPancake();
+ // cookPancake();
 
 }
 
 void cookPancake() {
   Serial.println("---PANCAKE COOK HAS STARTED---");
 
+
+  // Move up the top plate
+   motorY.setDirection(HIGH);
+   motorY.moveTo(2000);
+
+       // --SERVO SETUP--
+    servo.attach(servo_pin);
+    servo.write(180);              // tell servo to go to position in variable 'pos'
+
+
+  delay(500);                      
+
   // Open the valve 
   servo.write(0);              // tell servo to go to position in variable 'pos'
-  delay(1000);                       // waits 15ms for the servo to reach the position
+  delay(3000);                       // waits 15ms for the servo to reach the position
   servo.write(180);              // tell servo to go to position in variable 'pos'
+
   delay(1000);                       // waits 15ms for the servo to reach the position
 
   // Move down the top plate
   motorY.setDirection(LOW);
-  motorY.moveTo(300);
+  motorY.moveTo(0);
   delay(1000); 
 
   // Then wait
   Serial.println("---PANCAKE IS BEING COOKED FROM BOTH SIDES---");
   Serial.println("---PLEASE WAIT---");
-  delay(30000);
+  delay(60000);
 
   // Move up the top plate
   motorY.setDirection(HIGH);
@@ -104,6 +116,11 @@ void cookPancake() {
   motorX.setDirection(HIGH);
   motorX.moveTo(0);
   delay(1000);
+
+  // Move down the top plate
+  motorY.setDirection(LOW);
+  motorY.moveTo(0);
+  delay(1000); 
 
   // THen finished
   Serial.println("---PANCAKE IS FINISHED---");
