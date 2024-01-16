@@ -34,14 +34,21 @@ Servo servo;
 void setup() {
 
   // Move up the top plate
-   motorY.setDirection(HIGH);
-  motorY.moveTo(500);
+// motorY.setDirection(LOW);
+// motorY.moveTo(200);
+
+ //  motorX.setDirection(HIGH);
+  // motorX.moveTo(20);
 
     // -- DEBUG --
     Serial.begin(9600);
     Serial.println("initialized");
-    
-   cookPancake();
+
+    // --SERVO SETUP--
+
+
+
+  cookPancake();
   
 
  //
@@ -80,16 +87,13 @@ void cookPancake() {
    motorY.setDirection(HIGH);
    motorY.moveTo(2000);
 
-       // --SERVO SETUP--
-    servo.attach(servo_pin);
-    servo.write(180);              // tell servo to go to position in variable 'pos'
-
-
   delay(500);                      
 
   // Open the valve 
+  servo.attach(servo_pin);
+
   servo.write(0);              // tell servo to go to position in variable 'pos'
-  delay(3000);                       // waits 15ms for the servo to reach the position
+  delay(8000);                       // waits 15ms for the servo to reach the position
   servo.write(180);              // tell servo to go to position in variable 'pos'
 
   delay(1000);                       // waits 15ms for the servo to reach the position
@@ -102,7 +106,7 @@ void cookPancake() {
   // Then wait
   Serial.println("---PANCAKE IS BEING COOKED FROM BOTH SIDES---");
   Serial.println("---PLEASE WAIT---");
-  delay(60000);
+  delay(120000);
 
   // Move up the top plate
   motorY.setDirection(HIGH);
@@ -110,8 +114,8 @@ void cookPancake() {
 
   // And then rotate the lower plate
   motorX.setDirection(LOW);
-  motorX.moveTo(50);
-  delay(3000);
+  motorX.moveTo(100);
+  delay(5000);
 
   motorX.setDirection(HIGH);
   motorX.moveTo(0);
