@@ -3,13 +3,13 @@
 
 // -- Pancake cooking configuration variables --
 bool firstTimeSetup = true;
-int valveTime = 10000; // (miliseconds) on how the long the valve should be open 
-int cookTime = 1200000; // (miliseconds) on how long both the plates should cook the pancake
+int valveTime = 3000; // (miliseconds) on how the long the valve should be open 
+int cookTime = 120; // (seconds) on how long both the plates should cook the pancake
 
 // Define the stepper motor pins
 const int stepPinX = 2;
 const int dirPinX = 5;
-const int delayX = 2;
+const int delayX = 8;
 
 const int stepPinY = 3;
 const int dirPinY = 6;
@@ -33,39 +33,12 @@ Servo servo;
 
 void setup() {
 
-  // Move up the top plate
-// motorY.setDirection(LOW);
-// motorY.moveTo(200);
-
- //  motorX.setDirection(HIGH);
-  // motorX.moveTo(20);
-
     // -- DEBUG --
     Serial.begin(9600);
     Serial.println("initialized");
 
-    // --SERVO SETUP--
-
-
-
-  cookPancake();
+    cookPancake();
   
-
- //
-
-  
- /* motorY.setDirection(HIGH);
-  motorY.moveTo(2000);
-  delay(1000);
-  */
-
-
-  /*
-
-  motorY.setDirection(LOW);
-  motorY.moveTo(0);
-  delay(1000); 
-  */
 
 
     
@@ -74,8 +47,11 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  // Open the valve 
  // cookPancake();
+
+  
+
+
 
 }
 
@@ -93,7 +69,7 @@ void cookPancake() {
   servo.attach(servo_pin);
 
   servo.write(0);              // tell servo to go to position in variable 'pos'
-  delay(8000);                       // waits 15ms for the servo to reach the position
+  delay(valveTime);                       // waits 15ms for the servo to reach the position
   servo.write(180);              // tell servo to go to position in variable 'pos'
 
   delay(1000);                       // waits 15ms for the servo to reach the position
@@ -106,7 +82,15 @@ void cookPancake() {
   // Then wait
   Serial.println("---PANCAKE IS BEING COOKED FROM BOTH SIDES---");
   Serial.println("---PLEASE WAIT---");
-  delay(120000);
+
+  for (int i = cookTime; i >= 0; i--){
+    Serial.println(i);
+    delay(1000);
+  } 
+    
+  
+  Serial.println("---PLEASE WAIT---");
+
 
   // Move up the top plate
   motorY.setDirection(HIGH);
@@ -114,7 +98,7 @@ void cookPancake() {
 
   // And then rotate the lower plate
   motorX.setDirection(LOW);
-  motorX.moveTo(100);
+  motorX.moveTo(50);
   delay(5000);
 
   motorX.setDirection(HIGH);
